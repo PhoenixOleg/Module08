@@ -31,6 +31,11 @@ namespace Task1
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Метод для рекурсивного поиска с проверкой условия на дату
+        /// По-моему можно сделать более универсальным, сделав входящее перечисления по критерию фильтрации (создание, модификация и т. п.)
+        /// </summary>
+        /// <param name="dr">Каталог для поиска (точка входа)</param>
         private static void DelFilesByLastAccessDate(DirectoryInfo dr)
         {
             foreach (var fl in dr.GetFiles())
@@ -65,10 +70,22 @@ namespace Task1
             }
         }
 
+        /// <summary>
+        /// Универсальный метод удаления объекта FS
+        /// </summary>
+        /// <typeparam name="T">Объект FS для удаления, ограничен FileSystemInfo</typeparam>
+        /// <param name="Obj">Собственно объект FS</param>
         private static void DelFSObj<T>(T Obj) where T : FileSystemInfo
         {
             Console.WriteLine(string.Concat(Obj.GetType() == typeof(FileInfo) ? "Файл " : "Каталог ", $"{Obj.FullName}\nДата последнего доступа - {Obj.LastAccessTime.ToString()}\n"));
-            Obj.Delete();
+            try
+            {
+                Obj.Delete();
+            }
+            catch (Exception ex)
+            {
+                Lb.Library.ErrorHandler(ex.Message);
+            }
         }
     }
 }

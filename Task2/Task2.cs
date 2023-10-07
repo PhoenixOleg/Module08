@@ -13,7 +13,7 @@ namespace Task2
             {
                 if (Directory.Exists(destFolder))
                 {
-                    size = (new DirectoryInfo(destFolder).GetDirectorySize(true));
+                    size = new DirectoryInfo(destFolder).GetDirectorySize(true);
                 }
                 else
                 {
@@ -30,8 +30,17 @@ namespace Task2
         }
     }
 
+    /// <summary>
+    /// Класс расширение. Реализует рекурсивный поиск в каталоге
+    /// </summary>
     public static class DirectoryInfoExtension
     {
+        /// <summary>
+        /// Метод реализует рекурсивный поиск файлов каталоге
+        /// </summary>
+        /// <param name="dr">Каталог для поиска файлов</param>
+        /// <param name="Recurcive">true - ищем рекурсивно, false - ищем только в корне (переданной директории)</param>
+        /// <returns>Возвращаемое значение - суммарный размер найденный файлов</returns>
         public static long GetDirectorySize(this DirectoryInfo dr, bool Recurcive)
         {
             long size = 0;

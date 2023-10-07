@@ -8,6 +8,9 @@ using System.Data.Common;
 
 namespace Task3
 {
+    /// <summary>
+    /// Класс, содержащий информацию о размере удаленных файлов и их количестве
+    /// </summary>
     public class DirInfo
     {
         private long filessize;
@@ -80,6 +83,11 @@ internal class Task3
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Рекурсивное удаление файлов по дате последнего доступа
+        /// </summary>
+        /// <param name="dr">Целевой каталог</param>
+        /// <returns>Возвращает класс DirInfo (размер и количество удаленных файлов)</returns>
         private static DirInfo DelFilesByLastAccessDate(DirectoryInfo dr)
         {
             DirInfo dirInfo = new DirInfo();
@@ -144,6 +152,10 @@ internal class Task3
             return _size;
         }
 
+        /// <summary>
+        /// Метод удаляет каталог с учетом даты последнего доступа
+        /// </summary>
+        /// <param name="dr"></param>
         private static void DelFolders(DirectoryInfo dr)
         {
             {
